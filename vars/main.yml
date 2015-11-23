@@ -1,4 +1,4 @@
 ---
-intellij_archive: "ideaIC-14.1.4.tar.gz"
-intellij_url: "http://download.jetbrains.com/idea/{{intellij_archive}}"
-intellij_subdir: "idea-IC-141.1532.4"
+intellij_archive: "ideaIC-{{intellij_ver}}.tar.gz"
+intellij_url: "{{intellij_mirror}}/{{intellij_archive}}"
+intellij_subdir: "idea-IC-{{intellij_subdir_ver}}"
