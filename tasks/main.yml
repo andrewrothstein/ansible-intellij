@@ -1,13 +1,32 @@
 ---
 - name: download intellij
-  environment: proxy_env
-  get_url: url={{ intellij_url }} dest='/tmp/{{intellij_archive}}'
+  become: yes
+  become_user: root
+  get_url: >
+    url={{intellij_url}}
+    dest=/tmp/{{intellij_archive}}
 
 - name: install intellij
-  unarchive: copy=no dest='/opt' src='/tmp/{{intellij_archive}}'
+  become: yes
+  become_user: root
+  unarchive: >
+    copy=no
+    dest=/opt
+    src=/tmp/{{intellij_archive}}
+    creates=/opt/{{intellij_subdir}}
 
 - name: link /opt/intellij
-  file: src='/opt/{{ intellij_subdir }}' dest=/opt/intellij state=link
+  become: yes
+  become_user: root
+  file: >
+    src=/opt/{{intellij_subdir}}
+    dest=/opt/intellij
+    state=link
 
 - name: include intellij in the default path...
-  copy: src='etc/profile.d/intellij.sh' dest='/etc/profile.d/intellij.sh' mode=644
+  become: yes
+  become_user: root
+  copy: >
+    src=etc/profile.d/intellij.sh
+    dest=/etc/profile.d/intellij.sh
+    mode=0644
